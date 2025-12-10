@@ -47,10 +47,23 @@ function WeatherSearch() {
       <input
         type="text"
         value={city}
-        onChange={(e) => setCity(e.target.value)}
+        onChange={(e) => {
+          const value = e.target.value;
+
+          // ① 全角英数字 → 半角へ変換
+          const hankaku = value.replace(/[Ａ-Ｚａ-ｚ０-９]/g, (s) =>
+            String.fromCharCode(s.charCodeAt(0) - 0xFEE0)
+          );
+
+          // ② 半角英数字以外を除去
+          const filtered = hankaku.replace(/[^A-Za-z0-9]/g, "");
+
+          setCity(filtered);
+        }}
         placeholder="都市名（例：Tokyo）"
         className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:outline-none"
       />
+
 
       {/* 検索ボタン */}
       <button
