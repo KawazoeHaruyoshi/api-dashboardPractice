@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { TextField, Button, Stack, Alert } from "@mui/material";
 
 function WeatherSearch() {
   const [city, setCity] = useState("");
@@ -43,24 +42,38 @@ function WeatherSearch() {
   };
 
   return (
-    <Stack spacing={2}>
-      <TextField
-        label="都市名（例：Tokyo）"
-        variant="outlined"
+    <div className="flex flex-col gap-4">
+      {/* 入力欄 */}
+      <input
+        type="text"
         value={city}
         onChange={(e) => setCity(e.target.value)}
+        placeholder="都市名（例：Tokyo）"
+        className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:outline-none"
       />
 
-      <Button variant="contained" onClick={searchWeather}>
+      {/* 検索ボタン */}
+      <button
+        onClick={searchWeather}
+        className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition"
+      >
         天気を取得
-      </Button>
+      </button>
 
-      {error && <Alert severity="error">{error}</Alert>}
-
-      {temp !== null && (
-        <Alert severity="info">現在の気温： {temp} ℃</Alert>
+      {/* エラー */}
+      {error && (
+        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded">
+          {error}
+        </div>
       )}
-    </Stack>
+
+      {/* 結果 */}
+      {temp !== null && (
+        <div className="bg-blue-100 border border-blue-400 text-blue-700 px-4 py-2 rounded">
+          現在の気温：{temp} ℃
+        </div>
+      )}
+    </div>
   );
 }
 
