@@ -23,6 +23,7 @@ function App() {
           {/* --- 天気検索カード --- */}
           <div id="weather" className="bg-white shadow-md rounded-xl p-5 border">
             <h2 className="text-xl font-semibold mb-4">天気検索</h2>
+            <div className="mb-4">半角英語で入力してください</div>
             <WeatherSearch />
           </div>
 
